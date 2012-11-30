@@ -14,19 +14,11 @@ require([
 			alert("Hooray!");
 		});
 
-		$("button").click(function() {
-			localStorage.setItem("What", "is this devilry?");
-			console.log(localStorage["What"]);
-		});
-
-		$(window).bind("storage", function(e) {
-			var key = e.originalEvent.key;
-			var oldValue = e.originalEvent.oldValue;
-			var newValue = e.originalEvent.newValue;
-			var url = e.originalEvent.url;
-
-			console.log(url);
-			alert(url);
+		$(function() {
+			$("#clicky").click(function(e) {
+				var cT = new Date();
+				messagerunner.send(cT.getHours()+":"+cT.getMinutes()+":"+cT.getSeconds());
+			});
 		});
 	}
 );
