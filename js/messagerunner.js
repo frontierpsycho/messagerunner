@@ -5,8 +5,11 @@ define(['jquery'], function() {
 		// find out the key, run callbacks
 		var key = e.originalEvent.key;
 
+		var data = JSON.parse(e.originalEvent.newValue);
+		console.log(data);
+
 		// run callback
-		subscriptions[key][0]();
+		subscriptions[key][0](data);
 	};
 
 	$(window).bind("storage", runCallbacks);
@@ -16,9 +19,7 @@ define(['jquery'], function() {
 	};
 
 	var send = function(arg) {
-		// TODO serialize to JSON and deserialize on event
-		localStorage.setItem("default", arg);
-		
+		localStorage.setItem("default", JSON.stringify(arg));
 	};
 
 	var that = {};

@@ -10,14 +10,14 @@ require([
 		'messagerunner'
 	], 
 	function(messagerunner){
-		messagerunner.subscribe(function() {
-			alert("Hooray!");
+		messagerunner.subscribe(function(e) {
+			alert("Hooray! "+e.message);
 		});
 
 		$(function() {
 			$("#clicky").click(function(e) {
 				var cT = new Date();
-				messagerunner.send(cT.getHours()+":"+cT.getMinutes()+":"+cT.getSeconds());
+				messagerunner.send({message: cT.getHours()+":"+cT.getMinutes()+":"+cT.getSeconds()});
 			});
 		});
 	}
