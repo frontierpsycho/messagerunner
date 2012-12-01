@@ -12,20 +12,21 @@ This is a javascript project using HTML5's localStorage to pass messages asynchr
 	messagerunner.send({message: "Wake up!"});
 
 ### Standard, two way channel
-	var runner = runner("lala", function(e) { 
+	var runner = runner({channel: "lala", callback: function(e) { 
 		alert("New message! '"+e.message+"'");
-	});
+	}});
 	
 	runner.send({message: "Wake up!"});
 
 ### One way communication
-	var runner = runner({channel: "pipe", oneway: true});
+	var runner = runner({channel: "pipe"});
 
 ### Make it two way
-	runner.subscribe("pipe", function(e) { 
+	runner.subscribe(function(e) { 
 		alert("New message! '"+e.message+"'");
 	});
 
+## TODO
 ### Make it one way again
 	runner.unsubscribe("pipe");
 

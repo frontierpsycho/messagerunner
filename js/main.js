@@ -14,11 +14,20 @@ require([
 			alert("Hooray! "+e.message);
 		});
 
+		var r = messagerunner.runner({channel: "example", callback: function(e) {
+				alert("Alert, alert, the yellows are coming. "+e.message); 
+		} });
+
 		$(function() {
-			$("#clicky").click(function(e) {
+			$("#clicky1").click(function(e) {
 				var cT = new Date();
 				messagerunner.send({message: cT.getHours()+":"+cT.getMinutes()+":"+cT.getSeconds()});
 			});
+			$("#clicky2").click(function(e) {
+				var cT = new Date();
+				r.send({message: cT.getHours()+":"+cT.getMinutes()+":"+cT.getSeconds()});
+			});
 		});
+
 	}
 );
