@@ -27,6 +27,9 @@ require([
 				var cT = new Date();
 				r.send({message: cT.getHours()+":"+cT.getMinutes()+":"+cT.getSeconds()});
 			});
+			$("#clicky3").click(function(e) {
+				r.unsubscribe();
+			});
 		});
 
 	}

@@ -23,6 +23,10 @@ define(['jquery'], function() {
 		subscriptions['default'].push(f);
 	};
 
+	var unsubscribe = function() {
+		subscriptions['default'] = [] 
+	};
+
 	var send = function(arg) {
 		localStorage.setItem("default", JSON.stringify(arg));
 	};
@@ -39,6 +43,13 @@ define(['jquery'], function() {
 			}
 		};
 
+		var unsubscribe = function() {
+			if(subscriptions.hasOwnProperty(channel))
+			{
+				delete subscriptions[channel]
+			} 
+		};
+
 		if(spec.hasOwnProperty("callback"))
 		{
 			var callback = spec.callback;
@@ -51,6 +62,8 @@ define(['jquery'], function() {
 
 		var tother = {}
 		tother.send = send;
+		tother.subscribe = subscribe;
+		tother.unsubscribe = unsubscribe;
 		
 		return tother;
 	};
@@ -58,6 +71,7 @@ define(['jquery'], function() {
 
 	var that = {};
 	that.subscribe = subscribe;
+	that.unsubscribe = unsubscribe;
 	that.send = send;
 	that.runner = runner;
 
