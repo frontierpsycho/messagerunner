@@ -21,16 +21,18 @@ This is a javascript project using HTML5's localStorage to pass messages asynchr
 ### One way communication
 	var runner = runner({channel: "pipe"});
 
-### Make it two way
+### Bind a callback to the channel
 	runner.subscribe(function(e) { 
 		alert("New message! '"+e.message+"'");
 	});
 
-## TODO
-### Make it one way again
-	runner.unsubscribe("pipe");
+This can be called multiple times. 
 
-### Enable/disable, without destroying callback?
+### No longer listen to channel (essentially destroy channel)
+	runner.unsubscribe();
+
+## TODO
+### Enable/disable, without destroying callback
 	runner.disable();
 	runner.enable();
 
