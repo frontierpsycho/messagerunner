@@ -1,5 +1,6 @@
 define(['jquery'], function() {	
 	var subscriptions = {'default': []};
+	var disabled_subscriptions = {};
 
 	var runCallbacks = function(e) {
 		// find out the key, run callbacks
@@ -50,6 +51,26 @@ define(['jquery'], function() {
 			} 
 		};
 
+		var disable = function() {
+			if(subscriptions.hasOwnProperty(channel))
+			{
+				disabled_subscriptions[channel] = subscriptions[channel];
+				delete subscriptions[channel];
+			}
+		};
+
+		var enable = function() {
+			if(disabled_subscriptions.hasOwnProperty(channel))
+			{
+				subscriptions[channel] = disabled_subscriptions[channel];
+				delete disabled_subscriptions[channel];
+			}
+		};
+
+		var is_enabled = function() {
+			return subscriptions.hasOwnProperty(channel);
+		};
+
 		if(spec.hasOwnProperty("callback"))
 		{
 			var callback = spec.callback;
@@ -64,6 +85,9 @@ define(['jquery'], function() {
 		tother.send = send;
 		tother.subscribe = subscribe;
 		tother.unsubscribe = unsubscribe;
+		tother.is_enabled = is_enabled;
+		tother.disable = disable;
+		tother.enable = enable;
 		
 		return tother;
 	};

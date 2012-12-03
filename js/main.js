@@ -28,6 +28,14 @@ require([
 				r.send({message: cT.getHours()+":"+cT.getMinutes()+":"+cT.getSeconds()});
 			});
 			$("#clicky3").click(function(e) {
+				if(r.is_enabled())
+				{
+					r.disable();
+				} else {
+					r.enable();
+				}
+			});
+			$("#clicky4").click(function(e) {
 				r.unsubscribe();
 			});
 		});

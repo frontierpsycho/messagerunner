@@ -31,7 +31,6 @@ This can be called multiple times.
 ### No longer listen to channel (essentially destroy channel)
 	runner.unsubscribe();
 
-## TODO
 ### Enable/disable, without destroying callback
 	runner.disable();
 	runner.enable();
