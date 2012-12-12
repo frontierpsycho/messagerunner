@@ -1,12 +1,12 @@
-define(['jquery'], function() {	
+define([], function() {	
 	var subscriptions = {'default': []};
 	var disabled_subscriptions = {};
 
 	var runCallbacks = function(e) {
 		// find out the key, run callbacks
-		var key = e.originalEvent.key;
+		var key = e.key;
 
-		var data = JSON.parse(e.originalEvent.newValue);
+		var data = JSON.parse(e.newValue);
 
 		// run callbacks
 		try {
@@ -18,7 +18,19 @@ define(['jquery'], function() {
 		}
 	};
 
-	$(window).bind("storage", runCallbacks);
+	if (window.addEventListener)  //w3c
+	{
+		window.addEventListener("storage", runCallbacks, false);
+		r = true;
+	}
+	else if (window.attachEvent)  //ie
+	{
+		window["storage" + runCallbacks] = runCallbackstion ()
+		{
+			runCallbacks.call(this, window.event);
+		};
+		r = window.attachEvent("on" + "storage", window["storage" + runCallbacks]);
+	}
 
 	var subscribe = function(f) {
 		subscriptions['default'].push(f);
